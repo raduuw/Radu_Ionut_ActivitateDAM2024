@@ -19,6 +19,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Seminar_02"
-include(":app")
  
