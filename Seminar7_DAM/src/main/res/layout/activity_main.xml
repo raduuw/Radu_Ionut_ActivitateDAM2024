@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/buttonAdaugaMasina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adauga Masina"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.137"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/buttonListaMasini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista Masini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.234"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/buttonImagini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista imagini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.335"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/buttonAccuWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AccuWeather"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.597"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"/>
+
+
+</LinearLayout>
