@@ -68,6 +68,28 @@ public class AddMasinaActivity extends AppCompatActivity {
             Toast.makeText(AddMasinaActivity.this, masina.toString(), Toast.LENGTH_LONG).show();
 
 
+            Executor executor = Executors.newSingleThreadExecutor();
+            executor.execute(() -> {
+                try {
+
+                    FileOutputStream file = openFileOutput("masiniNoi.txt", MODE_APPEND);
+                    OutputStreamWriter output = new OutputStreamWriter(file);
+                    BufferedWriter writer = new BufferedWriter(output);
+                    writer.write(masina.toString() + "\n");
+                    writer.close();
+                    output.close();
+                    file.close();
+
+                    database.masinaDao().insert(masina);
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+
             Intent resultIntent = new Intent();
             resultIntent.putExtra("masina", masina);
             setResult(RESULT_OK, resultIntent);

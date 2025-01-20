@@ -2,6 +2,7 @@ package com.example.seminar7_dam_2;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -83,11 +84,23 @@ public class MasinaListActivity extends AppCompatActivity {
             startActivityForResult(intentModifica, 209);
         });
 
-        lv.setOnItemLongClickListener((adapterView, view, position, id) -> {
-            Masina masinaStearsa = masini.remove(position);
-            adapter.notifyDataSetChanged();
-            Toast.makeText(getApplicationContext(), "Șters: " + masinaStearsa.toString(), Toast.LENGTH_SHORT).show();
-            return true;
+//        lv.setOnItemLongClickListener((adapterView, view, position, id) -> {
+//            Masina masinaStearsa = masini.remove(position);
+//            adapter.notifyDataSetChanged();
+//            Toast.makeText(getApplicationContext(), "Șters: " + masinaStearsa.toString(), Toast.LENGTH_SHORT).show();
+//            return true;
+//        });
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                SharedPreferences sp = getSharedPreferences("obiecteFavorite", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString(masini.get(i).getKey(), masini.get(i).toString());
+                editor.apply();
+
+                Toast.makeText(getApplicationContext(), "Masina a fost salvata în Favorite", Toast.LENGTH_SHORT).show();
+                return true;
+            }
         });
 
     }
