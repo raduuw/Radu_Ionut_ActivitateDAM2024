@@ -62,8 +62,31 @@ public class AddMasinaActivity extends AppCompatActivity {
             boolean esteElectrica = esteElectricaSwitch.isChecked();
             int caiPutere = Integer.parseInt(caiPutereEditText.getText().toString());
 
-            Masina masina = new Masina(model, an, brand, esteElectrica, caiPutere);
+            CheckBox cbDisponibil = findViewById(R.id.cbDisponibilOnline);
+            Boolean disponibilOnline = cbDisponibil.isChecked();
 
+            Masina masina = new Masina(model, an, brand, esteElectrica, caiPutere);
+            if(disponibilOnline){
+//                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                    DatabaseReference myRef = database.getReference("message");
+//
+//                    myRef.setValue("Hello, World!");
+                try{
+                    FileOutputStream file;
+                    file = openFileOutput("elementeBifate.txt", MODE_APPEND);
+                    OutputStreamWriter output = new OutputStreamWriter(file);
+                    BufferedWriter writer = new BufferedWriter(output);
+                    writer.write(masina.toString());
+                    writer.close();
+                    output.close();
+                    file.close();
+                    Toast.makeText(AddMasinaActivity.this, "element adaugat in fisier", Toast.LENGTH_LONG);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
             Toast.makeText(AddMasinaActivity.this, masina.toString(), Toast.LENGTH_LONG).show();
 
