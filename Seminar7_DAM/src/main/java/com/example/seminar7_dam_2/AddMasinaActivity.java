@@ -5,13 +5,26 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.room.Room;
 
-
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class AddMasinaActivity extends AppCompatActivity {
 
+    private MasinaDatabase database;
 
     private EditText modelEditText;
     private EditText anEditText;
@@ -24,22 +37,21 @@ public class AddMasinaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_masina);
 
+        EdgeToEdge.enable(this);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+
+        database = Room.databaseBuilder(getApplicationContext(), MasinaDatabase.class, "Masina.db").build();
+
         modelEditText = findViewById(R.id.editTextModel);
         anEditText = findViewById(R.id.editTextAn);
         brandEditText = findViewById(R.id.editTextBrand);
         esteElectricaSwitch = findViewById(R.id.checkBoxElectrica);
         caiPutereEditText = findViewById(R.id.editTextCaiPutere);
-
-        Intent intent = getIntent();
-        Masina masinaPrimita = intent.getParcelableExtra("masina");
-
-        if (masinaPrimita != null) {
-            modelEditText.setText(masinaPrimita.getModel());
-            anEditText.setText(String.valueOf(masinaPrimita.getAn()));
-            brandEditText.setText(masinaPrimita.getBrand());
-            esteElectricaSwitch.setChecked(masinaPrimita.isEsteElectrica());
-            caiPutereEditText.setText(String.valueOf(masinaPrimita.getCaiPutere()));
-        }
 
 
         Button btnSave = findViewById(R.id.buttonAdaugaMasina);
@@ -50,10 +62,14 @@ public class AddMasinaActivity extends AppCompatActivity {
             boolean esteElectrica = esteElectricaSwitch.isChecked();
             int caiPutere = Integer.parseInt(caiPutereEditText.getText().toString());
 
-            Masina masinaModificata = new Masina(model, an, brand, esteElectrica, caiPutere);
+            Masina masina = new Masina(model, an, brand, esteElectrica, caiPutere);
+
+
+            Toast.makeText(AddMasinaActivity.this, masina.toString(), Toast.LENGTH_LONG).show();
+
 
             Intent resultIntent = new Intent();
-            resultIntent.putExtra("masina", masinaModificata);
+            resultIntent.putExtra("masina", masina);
             setResult(RESULT_OK, resultIntent);
             finish();
         });

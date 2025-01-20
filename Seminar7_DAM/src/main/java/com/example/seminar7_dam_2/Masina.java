@@ -4,8 +4,14 @@ package com.example.seminar7_dam_2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Masina implements Parcelable {
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity
+public class Masina implements Parcelable {
+    @PrimaryKey
+    @NonNull
     private String model;
     private int an;
     private String brand;

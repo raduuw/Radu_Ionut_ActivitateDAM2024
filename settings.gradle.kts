@@ -19,4 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
+rootProject.name = "Seminar7_DAM_2"
+
+include(":Seminar7_DAM")
  
